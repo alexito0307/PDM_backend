@@ -33,6 +33,8 @@ def create_account():
     
     #ultimo agregado
     nombre = getData.get('nombre') or ""
+    biografia = getData.get('biografia') or ""
+    avatar_url = getData.get('avatar_url') or ""
 
     # Validaciones básicas
     if not username or not email or not password:
@@ -50,8 +52,8 @@ def create_account():
         'email': email,
         'password': hashed_password,
         'nombre':nombre,
-        'biografia': '',
-        'avatar_url': ''
+        'biografia': biografia,
+        'avatar_url': avatar_url
     }
     try:
         current_app.db.usuarios.insert_one(new_user)
