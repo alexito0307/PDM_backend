@@ -167,8 +167,6 @@ def update_profile():
 
     if 'nombre' in data:
         update_fields['nombre'] = data['nombre']  # Corregido
-    if 'username' in data:
-        update_fields['username'] = data['username']  # Corregido
     if 'biografia' in data:
         update_fields['biografia'] = data['biografia']  # Corregido
     if 'avatar_url' in data:
@@ -179,14 +177,14 @@ def update_profile():
 
     try:
         result = current_app.db.usuarios.update_one(
-            {'_id': current_user},
+            {'username': current_user},
             {'$set': update_fields}  # Corregido
         )
         if result.matched_count == 0:
             return jsonify({'error': 'Usuario no encontrado'}), 404
 
         updated_user = current_app.db.usuarios.find_one(
-            {'_id': current_user},
+            {'username': current_user},
             {'password': 0}
         )
 
